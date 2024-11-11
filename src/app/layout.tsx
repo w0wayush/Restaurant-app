@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import "./global.scss";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import Header from "@/components/molecules/Header";
+import CopyrightInfo from "@/components/atoms/CopyrightInfo";
+import BranchSection from "@/components/atoms/BranchSection";
+import styles from "./layout.module.scss";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${styles.layout}`}>
+        <Header /> <div className={styles.layout__content}>{children}</div>
+        <BranchSection />
+        <CopyrightInfo text={"\u00A9 2024 My Website. All rights reserved"} />
+        <Analytics /> <SpeedInsights />
+      </body>
     </html>
   );
 }
